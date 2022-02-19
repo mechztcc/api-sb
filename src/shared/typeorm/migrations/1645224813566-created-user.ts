@@ -10,6 +10,8 @@ export class createdUser1645224813566 implements MigrationInterface {
             name: 'id',
             type: 'int',
             isPrimary: true,
+            isGenerated: true,
+            generationStrategy: 'increment'
           },
           {
             name: 'email',
@@ -25,12 +27,14 @@ export class createdUser1645224813566 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'createdAt',
+            name: 'created_at',
             type: 'timestamp',
+            default: 'now()'
           },
           {
-            name: 'updatedAt',
+            name: 'updated_at',
             type: 'timestamp',
+            default: 'now()'
           },
         ],
       })
