@@ -1,8 +1,9 @@
 import { getCustomRepository } from 'typeorm';
 import { User } from '../typeorm/entities/User';
 import { UsersRepository } from '../typeorm/repositories/UsersRepository';
-import { hash} from 'bcryptjs';
+import { hash } from 'bcryptjs';
 import AppError from '@shared/errors/AppError';
+import { EtherealMail } from '@config/mail/Etherealmail';
 
 interface IRequest {
   name: string;
@@ -11,9 +12,7 @@ interface IRequest {
 }
 
 export class CreateUserService {
-
-  constructor() {
-  }
+  constructor() {}
 
   public async execute({ name, email, password }: IRequest): Promise<User> {
     const usersRepository = getCustomRepository(UsersRepository);
@@ -26,9 +25,19 @@ export class CreateUserService {
 
     const hashedPassword = await hash(password, 8);
 
-		const user = await usersRepository.create({ name, email, password: hashedPassword });
-		await usersRepository.save(user);
+    const user = await usersRepository.create({
+      name,
+      email,
+      password: hashedPassword,
+    });
+    await usersRepository.save(user);
 
-		return user;
+    await EtherealMail.sendEmail({
+      to: { email:  user.email, name: user.name },
+      from: { email: 'equipe@email.com', name: 'Equipe' },
+      subject: 'Account created',
+    });
+
+    return user;
   }
 }
