@@ -32,7 +32,7 @@ interface IResponse {
 	token: string;
 }
 
-class CreateSessionService {
+export class CreateSessionService {
   async execute({ email, password }: IRequest): Promise<IResponse> {
     const usersRepository = getCustomRepository(UsersRepository);
 
@@ -46,6 +46,7 @@ class CreateSessionService {
     if (!passwordConfirmed) {
       throw new AppError('Incorrect email/password combination.', 401);
     }
+    user.password = undefined;
 
     const token = sign({}, authConfig.jwt.secret, {
       subject: String(user.id),
