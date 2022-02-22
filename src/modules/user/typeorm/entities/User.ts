@@ -1,5 +1,13 @@
-import { FoodStore } from 'src/modules/foodstore/typeorm/entities/FoodStore';
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+
+import { FoodStore } from '../../../../modules/foodstore/typeorm/entities/FoodStore';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('users')
 export class User {
@@ -15,13 +23,12 @@ export class User {
   @Column()
   password: string;
 
-  @OneToMany(() => FoodStore, foodstore => foodstore.user)
-  foodstore: FoodStore;
+  @OneToMany((type) => FoodStore, (foodstore) => foodstore.user)
+  foodstore: FoodStore[];
 
   @CreateDateColumn()
   created_at: Date;
-  
+
   @UpdateDateColumn()
   updated_at: Date;
-
 }

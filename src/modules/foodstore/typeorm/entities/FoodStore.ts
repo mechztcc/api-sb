@@ -1,22 +1,30 @@
-import { User } from "src/modules/user/typeorm/entities/User";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+
+
+import { User } from '../../../../modules/user/typeorm/entities/User';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('foodstores')
 export class FoodStore {
+  @PrimaryGeneratedColumn('increment')
+  id: number;
 
-    @PrimaryGeneratedColumn('identity')
-    id: number;
+  @Column()
+  name: string;
 
-    @Column()
-    name: string;
+  @ManyToOne((type) => User, (user) => user.foodstore)
+  user: User;
 
-    @ManyToOne(() => User)
-    @JoinColumn({ name: 'user_id' })
-    user: User;
+  @CreateDateColumn()
+  created_at: Date;
 
-    @CreateDateColumn()
-    created_at: Date;
-    
-    @UpdateDateColumn()
-    updated_at: Date;
+  @UpdateDateColumn()
+  updated_at: Date;
 }
