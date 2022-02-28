@@ -7,7 +7,7 @@ import { FoodstoreRepository } from '../typeorm/repositories/FoodstoreRepository
 
 interface IRequest {
   name: string;
-  user_id: number;
+  user_id: string;
   zip_code: string;
   street: string;
   number: string;
