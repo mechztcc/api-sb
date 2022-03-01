@@ -8,8 +8,10 @@ export class UsersController {
 
     const createUser = new CreateUserService();
 
+
     const user = await createUser.execute({ name, email, password });
 
+    user.password = undefined;
     return res.json(user);
   }
 

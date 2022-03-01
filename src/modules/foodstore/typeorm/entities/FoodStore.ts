@@ -19,6 +19,10 @@ export class FoodStore {
   @Column()
   name: string;
 
+
+  @Column()
+  actived: boolean;
+
   @ManyToOne((type) => User, (user) => user.foodstore)
   user: User;
 
