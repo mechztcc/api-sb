@@ -6,5 +6,6 @@ const foodstoreController = new FoodstoreController();
 const foodstoreRouter = Router();
 
 foodstoreRouter.post('/create', isAuthenticated, foodstoreController.create);
+foodstoreRouter.get('/listAll', isAuthenticated, foodstoreController.listAll);
 
 export default foodstoreRouter;

@@ -13,6 +13,7 @@ interface IRequest {
   number: string;
   city: string;
   state: string;
+  actived: boolean
 }
 
 export class CreateFoodstoreService {
@@ -24,32 +25,40 @@ export class CreateFoodstoreService {
     number,
     city,
     state,
+    actived
   }: IRequest): Promise<FoodStore> {
     const foodstoreRepository = getCustomRepository(FoodstoreRepository);
     const usersRepository = getCustomRepository(UsersRepository);
     const addressRepository = getCustomRepository(AddressRepository);
 
-    const user = await usersRepository.findOne({ where: { id: user_id } });
-    if (!user) {
-      throw new AppError('User not found');
+    try {
+      const user = await usersRepository.findOne({ where: { id: user_id } });
+      if (!user) {
+        throw new AppError('User not found');
+      }
+      const address = addressRepository.create({
+        zip_code,
+        street,
+        number,
+        city,
+        state
+      });
+      await addressRepository.save(address);
+
+      const foodstore = foodstoreRepository.create({
+        name,
+        user: user,
+        address: address,
+        actived: actived
+      });
+
+      await foodstoreRepository.save(foodstore);
+
+      return foodstore;
+    } catch (error) {
+      console.log(error);
+
+      
     }
-    const address = addressRepository.create({
-      zip_code,
-      street,
-      number,
-      city,
-      state,
-    });
-    await addressRepository.save(address);
-
-    const foodstore = foodstoreRepository.create({
-      name,
-      user: user,
-      address: address,
-    });
-
-    await foodstoreRepository.save(foodstore);
-
-    return foodstore;
   }
 }
