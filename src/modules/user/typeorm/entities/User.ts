@@ -23,6 +23,9 @@ export class User {
   @Column()
   password: string;
 
+  @Column()
+  active: boolean;
+
   @OneToMany((type) => FoodStore, (foodstore) => foodstore.user)
   foodstore: FoodStore[];
 
