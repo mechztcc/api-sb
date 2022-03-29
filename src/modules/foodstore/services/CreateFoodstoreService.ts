@@ -13,6 +13,7 @@ interface IRequest {
   number: string;
   city: string;
   state: string;
+  actived: boolean;
 }
 
 export class CreateFoodstoreService {
@@ -24,6 +25,7 @@ export class CreateFoodstoreService {
     number,
     city,
     state,
+    actived,
   }: IRequest): Promise<FoodStore> {
     const foodstoreRepository = getCustomRepository(FoodstoreRepository);
     const usersRepository = getCustomRepository(UsersRepository);
@@ -46,6 +48,7 @@ export class CreateFoodstoreService {
       name,
       user: user,
       address: address,
+      actived: actived
     });
 
     await foodstoreRepository.save(foodstore);

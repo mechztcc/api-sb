@@ -23,10 +23,10 @@ export class FoodStore {
   @Column()
   actived: boolean;
 
-  @ManyToOne((type) => User, (user) => user.foodstore)
+  @ManyToOne((type) => User, (user) => user.foodstore, { onDelete: 'CASCADE' })
   user: User;
 
-  @OneToOne((type) => Address)
+  @OneToOne((type) => Address, { onDelete: 'CASCADE' })
   @JoinColumn()
   address: Address;
 

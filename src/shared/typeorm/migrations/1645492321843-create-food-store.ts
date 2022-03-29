@@ -37,10 +37,12 @@ export class createFoodStore1645492321843 implements MigrationInterface {
           {
             name: 'created_at',
             type: 'timestamp',
+            default: 'now()',
           },
           {
             name: 'updated_at',
             type: 'timestamp',
+            default: 'now()'
           },
         ],
       })
@@ -52,11 +54,12 @@ export class createFoodStore1645492321843 implements MigrationInterface {
         columnNames: ['userId'],
         referencedTableName: 'users',
         referencedColumnNames: ['id'],
+        onDelete: 'CASCADE'
       })
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('foodstores');
+    await queryRunner.dropTable('foodstores', true, true);
   }
 }

@@ -23,7 +23,7 @@ export class User {
   @Column()
   password: string;
 
-  @OneToMany((type) => FoodStore, (foodstore) => foodstore.user)
+  @OneToMany((type) => FoodStore, (foodstore) => foodstore.user, { onDelete: 'CASCADE' })
   foodstore: FoodStore[];
 
   @CreateDateColumn()
