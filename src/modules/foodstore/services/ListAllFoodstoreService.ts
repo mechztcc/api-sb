@@ -6,8 +6,11 @@ export class ListAllFoodstoreService {
   async execute(): Promise<FoodStore[]> {
     const foodstoreRepository = getCustomRepository(FoodstoreRepository);
 
-		const foodstores = await foodstoreRepository.find({ where: { actived: true }});
+    const foodstores = await foodstoreRepository.find({
+      relations: ['address'],
+      where: { actived: true },
+    });
 
-		return foodstores;
+    return foodstores;
   }
 }
