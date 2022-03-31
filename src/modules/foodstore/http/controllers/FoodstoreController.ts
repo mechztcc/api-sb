@@ -1,3 +1,4 @@
+import { DeleteFoodstoreService } from '@modules/foodstore/services/DeleteFoodstoreService';
 import { ListAllFoodstoreByUserService } from '@modules/foodstore/services/ListAllFoodstoreByUserService';
 import { ListAllFoodstoreService } from '@modules/foodstore/services/ListAllFoodstoreService';
 import { Request, Response } from 'express';
@@ -6,7 +7,8 @@ import { CreateFoodstoreService } from '../../services/CreateFoodstoreService';
 export class FoodstoreController {
   async create(req: Request, res: Response): Promise<Response> {
     try {
-      const { name, zip_code, street, number, city, state, actived } = req.body;
+      const { name, actived } = req.body;
+      const { zip_code, street, number, city, state } = req.body.address;
       const { id } = req.user;
 
       const createFoodstore = new CreateFoodstoreService();
@@ -19,7 +21,7 @@ export class FoodstoreController {
         number,
         city,
         state,
-        actived
+        actived,
       });
 
       return res.json(foodstore);
@@ -49,6 +51,20 @@ export class FoodstoreController {
       const foodstores = await ListAllFoodstore.execute({ id });
 
       return res.json(foodstores);
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ message: 'Error when execute task ' });
+    }
+  }
+
+  async delete(req: Request, res: Response): Promise<Response> {
+    try {
+      const { id } = req.body;
+
+      const deleteFoodstore = new DeleteFoodstoreService();
+      await deleteFoodstore.execute({ id });
+
+      return res.json({ message: 'Foodstore removed! ' });
     } catch (error) {
       console.log(error);
       return res.status(400).json({ message: 'Error when execute task ' });
