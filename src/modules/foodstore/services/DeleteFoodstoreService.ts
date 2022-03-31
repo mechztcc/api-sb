@@ -3,7 +3,7 @@ import { FoodstoreRepository } from "../typeorm/repositories/FoodstoreRepository
 
 
 interface IRequest {
-    id: number;
+    id: number | string;
 }
 
 export class DeleteFoodstoreService {

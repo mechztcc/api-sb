@@ -59,7 +59,7 @@ export class FoodstoreController {
 
   async delete(req: Request, res: Response): Promise<Response> {
     try {
-      const { id } = req.body;
+      const { id } = req.params;
 
       const deleteFoodstore = new DeleteFoodstoreService();
       await deleteFoodstore.execute({ id });
