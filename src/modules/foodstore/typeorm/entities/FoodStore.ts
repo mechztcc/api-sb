@@ -26,8 +26,8 @@ export class FoodStore {
   @ManyToOne((type) => User, (user) => user.foodstore, { onDelete: 'CASCADE' })
   user: User;
 
-  @ManyToOne((type) => Category, (category) => category.foodstore, { onDelete: 'CASCADE' })
-  category: Category[];
+  // @ManyToOne((type) => Category, (category) => category.foodstore, { onDelete: 'CASCADE' })
+  // category: Category[];
 
   @OneToOne((type) => Address, { onDelete: 'CASCADE' })
   @JoinColumn()
