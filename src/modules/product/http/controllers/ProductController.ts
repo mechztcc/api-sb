@@ -1,4 +1,5 @@
 import { CreateProductService } from '@modules/product/services/CreateProductService';
+import { ListAllProductsByCategoryService } from '@modules/product/services/ListAllProductsByCategoryService';
 import { ListAllProductsService } from '@modules/product/services/ListAllProductsService';
 import { Request, Response } from 'express';
 
@@ -30,6 +31,22 @@ export class ProductController {
       });
 
       return res.json(product);
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ message: 'Error when execute task ' });
+    }
+  }
+
+  async listAllByCategory(req: Request, res: Response): Promise<Response> {
+    try {
+      const { id } = req.params;
+
+      const listAllByCategory = new ListAllProductsByCategoryService()
+
+      const products = await listAllByCategory.execute({ id });
+
+      return res.json(products);
+      
     } catch (error) {
       console.log(error);
       return res.status(400).json({ message: 'Error when execute task ' });
