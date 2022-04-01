@@ -103,7 +103,6 @@ export class createCategoryProduct1648829229929 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'categories',
       new TableForeignKey({
-        name: 'category_product',
         columnNames: ['productsId'],
         referencedTableName: 'products',
         referencedColumnNames: ['id'],
@@ -114,7 +113,6 @@ export class createCategoryProduct1648829229929 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'products',
       new TableForeignKey({
-        name: 'product_category',
         columnNames: ['categoryId'],
         referencedTableName: 'categories',
         referencedColumnNames: ['id'],
@@ -125,8 +123,16 @@ export class createCategoryProduct1648829229929 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<void> {
 
-    await queryRunner.dropForeignKey('categories', 'category_product');
-    await queryRunner.dropForeignKey('products', 'product_category');
+    const tableProd = await queryRunner.getTable('products');
+    const prodFk = tableProd.foreignKeys.find((fk) => fk.columnNames.indexOf('categoryId') !== -1);
+
+    const tableCat = await queryRunner.getTable('categories');
+    const catProdFk = tableCat.foreignKeys.find((fk) => fk.columnNames.indexOf('productsId') !== -1);
+    const catStoreFk = tableCat.foreignKeys.find((fk) => fk.columnNames.indexOf('foodstoreId') !== -1);
+
+    await queryRunner.dropForeignKey('categories', catProdFk);
+    await queryRunner.dropForeignKey('categories', catStoreFk);
+    await queryRunner.dropForeignKey('products', prodFk);
 
     await queryRunner.dropTable('categories');
     await queryRunner.dropTable('products');

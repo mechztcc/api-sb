@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -20,10 +21,10 @@ export class Category {
   @Column()
   actived: boolean;
 
-  @ManyToOne((type) => FoodStore, (foodstore) => foodstore.category, { onDelete: 'CASCADE' })
+  @ManyToOne((type) => FoodStore, (foodstore) => foodstore.category)
   foodstore: FoodStore;
 
-  @ManyToOne((type) => Product, (product) => product.category, { onDelete: 'CASCADE' })
+  @OneToMany((type) => Product, (product) => product.category)
   product: Product[];
 
   @CreateDateColumn()

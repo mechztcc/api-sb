@@ -1,15 +1,12 @@
 
-import { FoodStore } from '../../../../modules/foodstore/typeorm/entities/FoodStore';
 import {
   Column,
   CreateDateColumn,
-  Entity,
-  ManyToOne,
-  OneToMany,
+  Entity, OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
+  UpdateDateColumn
 } from 'typeorm';
-import { Category } from '@modules/category/typeorm/entities/Category';
+import { FoodStore } from '../../../../modules/foodstore/typeorm/entities/FoodStore';
 
 @Entity('users')
 export class User {
