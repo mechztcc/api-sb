@@ -4,10 +4,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Category } from '@modules/category/typeorm/entities/Category';
 
 @Entity('users')
 export class User {
@@ -25,6 +27,7 @@ export class User {
 
   @OneToMany((type) => FoodStore, (foodstore) => foodstore.user, { onDelete: 'CASCADE' })
   foodstore: FoodStore[];
+
 
   @CreateDateColumn()
   created_at: Date;

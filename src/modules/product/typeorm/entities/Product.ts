@@ -1,7 +1,9 @@
+import { Category } from '../../../category/typeorm/entities/Category';
 import {
     Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -17,8 +19,8 @@ export class Product {
   @Column()
   price: string;
 
-  @Column()
-  category: string;
+  @ManyToOne((type) => Category, (category) => category.product, { onDelete: 'CASCADE' })
+  category: Category;
 
   @Column()
   size: string;
