@@ -1,4 +1,5 @@
 import { DeleteFoodstoreService } from '@modules/foodstore/services/DeleteFoodstoreService';
+import { FindFoodstoreService } from '@modules/foodstore/services/FindFoodstoreService';
 import { ListAllFoodstoreByUserService } from '@modules/foodstore/services/ListAllFoodstoreByUserService';
 import { ListAllFoodstoreService } from '@modules/foodstore/services/ListAllFoodstoreService';
 import { Request, Response } from 'express';
@@ -24,6 +25,20 @@ export class FoodstoreController {
         actived,
       });
 
+      return res.json(foodstore);
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ message: 'Error when execute task ' });
+    }
+  }
+
+  async findDetails(req: Request, res: Response): Promise<Response> {
+    try {
+      const { id } = req.params;
+
+      const findFoodstore = new FindFoodstoreService();
+
+      const foodstore = await findFoodstore.execute({ id: id });
       return res.json(foodstore);
     } catch (error) {
       console.log(error);
