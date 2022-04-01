@@ -19,7 +19,7 @@ export class Product {
   @Column()
   price: string;
 
-  @ManyToOne((type) => Category, (category) => category.product, { onDelete: 'CASCADE' })
+  @ManyToOne((type) => Category, (category) => category.product)
   category: Category;
 
   @Column()

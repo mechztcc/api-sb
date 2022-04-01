@@ -21,7 +21,7 @@ export class Category {
   @Column()
   actived: boolean;
 
-  @ManyToOne((type) => FoodStore, (foodstore) => foodstore.category)
+  @ManyToOne((type) => FoodStore)
   foodstore: FoodStore;
 
   @OneToMany((type) => Product, (product) => product.category)

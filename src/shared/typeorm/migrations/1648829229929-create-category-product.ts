@@ -72,11 +72,6 @@ export class createCategoryProduct1648829229929 implements MigrationInterface {
             type: 'int',
           },
           {
-            name: 'productsId',
-            type: 'int',
-
-          },
-          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
@@ -100,15 +95,6 @@ export class createCategoryProduct1648829229929 implements MigrationInterface {
         onDelete: 'CASCADE',
       })
     );
-    await queryRunner.createForeignKey(
-      'categories',
-      new TableForeignKey({
-        columnNames: ['productsId'],
-        referencedTableName: 'products',
-        referencedColumnNames: ['id'],
-        onDelete: 'CASCADE',
-      })
-    );
 
     await queryRunner.createForeignKey(
       'products',
@@ -127,10 +113,8 @@ export class createCategoryProduct1648829229929 implements MigrationInterface {
     const prodFk = tableProd.foreignKeys.find((fk) => fk.columnNames.indexOf('categoryId') !== -1);
 
     const tableCat = await queryRunner.getTable('categories');
-    const catProdFk = tableCat.foreignKeys.find((fk) => fk.columnNames.indexOf('productsId') !== -1);
     const catStoreFk = tableCat.foreignKeys.find((fk) => fk.columnNames.indexOf('foodstoreId') !== -1);
 
-    await queryRunner.dropForeignKey('categories', catProdFk);
     await queryRunner.dropForeignKey('categories', catStoreFk);
     await queryRunner.dropForeignKey('products', prodFk);
 
