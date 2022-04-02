@@ -8,6 +8,7 @@ const categoryRouter = Router();
 
 categoryRouter.post('/create', isAuthenticated, categoryController.create);
 categoryRouter.get('/findByFoodstore/:id', isAuthenticated, categoryController.listAllByFoodstore);
+categoryRouter.get('/find-products/foodstore/:id', isAuthenticated, categoryController.listAllProductsByFoodstore);
 
 
 export default categoryRouter;
