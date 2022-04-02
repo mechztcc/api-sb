@@ -20,7 +20,6 @@ export class ListAllCategoriesByFoodstoreWithProducts {
       select: ['name'],
       relations: ['product'],
     });
-    console.log(categories[0].product);
 
     let prods: any[] = [];
 
@@ -29,7 +28,7 @@ export class ListAllCategoriesByFoodstoreWithProducts {
 
       let { product } = element;
 
-      if(product.length > 0) {
+      if(product?.length > 0) {
         for (let index = 0; index < product.length; index++) {
           const el = product[index];
           prods.push(el);
