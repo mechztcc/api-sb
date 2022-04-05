@@ -1,12 +1,33 @@
+<<<<<<< HEAD
+import { ListAllFoodstoresService } from '@modules/foodstore/services/ListAllFoodstoresService';
+=======
 import { DeleteFoodstoreService } from '@modules/foodstore/services/DeleteFoodstoreService';
 import { FindFoodstoreService } from '@modules/foodstore/services/FindFoodstoreService';
 import { ListAllFoodstoreByUserService } from '@modules/foodstore/services/ListAllFoodstoreByUserService';
 import { ListAllFoodstoreService } from '@modules/foodstore/services/ListAllFoodstoreService';
+>>>>>>> feature/product-category
 import { Request, Response } from 'express';
 import { CreateFoodstoreService } from '../../services/CreateFoodstoreService';
 
 export class FoodstoreController {
   async create(req: Request, res: Response): Promise<Response> {
+<<<<<<< HEAD
+    const { name, zip_code, street, number, city, state, actived } = req.body;
+    const { id } = req.user;
+
+    const createFoodstore = new CreateFoodstoreService();
+
+    const foodstore = await createFoodstore.create({
+      name,
+      user_id: id,
+      zip_code,
+      street,
+      number,
+      city,
+      state,
+      actived
+    });
+=======
     try {
       const { name, actived } = req.body;
       const { zip_code, street, number, city, state } = req.body.address;
@@ -31,6 +52,7 @@ export class FoodstoreController {
       return res.status(400).json({ message: 'Error when execute task ' });
     }
   }
+>>>>>>> feature/product-category
 
   async findDetails(req: Request, res: Response): Promise<Response> {
     try {
@@ -84,5 +106,15 @@ export class FoodstoreController {
       console.log(error);
       return res.status(400).json({ message: 'Error when execute task ' });
     }
+  }
+
+  async listAll(req: Request, res: Response): Promise<Response> {
+    const { id } = req.user;
+
+    const listAllFoodStores = new ListAllFoodstoresService();
+
+    const foodstores = await listAllFoodStores.execute({ user_id: id });
+
+    return res.json(foodstores);
   }
 }

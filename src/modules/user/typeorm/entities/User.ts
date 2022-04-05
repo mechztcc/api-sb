@@ -22,7 +22,14 @@ export class User {
   @Column()
   password: string;
 
+<<<<<<< HEAD
+  @Column()
+  active: boolean;
+
+  @OneToMany((type) => FoodStore, (foodstore) => foodstore.user)
+=======
   @OneToMany((type) => FoodStore, (foodstore) => foodstore.user, { onDelete: 'CASCADE' })
+>>>>>>> feature/product-category
   foodstore: FoodStore[];
 
 

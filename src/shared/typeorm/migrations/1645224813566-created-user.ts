@@ -27,6 +27,11 @@ export class createdUser1645224813566 implements MigrationInterface {
             type: 'varchar',
           },
           {
+            name: 'active',
+            type: 'boolean',
+            default: 'true'
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()'

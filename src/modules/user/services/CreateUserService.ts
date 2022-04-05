@@ -29,6 +29,7 @@ export class CreateUserService {
       name,
       email,
       password: hashedPassword,
+      active: true
     });
     await usersRepository.save(user);
 
