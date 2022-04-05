@@ -1,13 +1,12 @@
 
-import { FoodStore } from '../../../../modules/foodstore/typeorm/entities/FoodStore';
 import {
   Column,
   CreateDateColumn,
-  Entity,
-  OneToMany,
+  Entity, OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
+  UpdateDateColumn
 } from 'typeorm';
+import { FoodStore } from '../../../../modules/foodstore/typeorm/entities/FoodStore';
 
 @Entity('users')
 export class User {
@@ -25,6 +24,7 @@ export class User {
 
   @OneToMany((type) => FoodStore, (foodstore) => foodstore.user, { onDelete: 'CASCADE' })
   foodstore: FoodStore[];
+
 
   @CreateDateColumn()
   created_at: Date;
