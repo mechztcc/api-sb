@@ -20,6 +20,7 @@ interface IUser {
 
   password: string;
 
+
   avatar?: string;
 
   created_at?: Date;
@@ -52,6 +53,7 @@ export class CreateSessionService {
       subject: String(user.id),
       expiresIn: authConfig.jwt.expiresIn,
     });
+
 
 		return { user, token };
   }

@@ -13,7 +13,11 @@ interface IRequest {
   number: string;
   city: string;
   state: string;
+<<<<<<< HEAD
   actived: boolean
+=======
+  actived: boolean;
+>>>>>>> feature/product-category
 }
 
 export class CreateFoodstoreService {
@@ -25,7 +29,11 @@ export class CreateFoodstoreService {
     number,
     city,
     state,
+<<<<<<< HEAD
     actived
+=======
+    actived,
+>>>>>>> feature/product-category
   }: IRequest): Promise<FoodStore> {
     const foodstoreRepository = getCustomRepository(FoodstoreRepository);
     const usersRepository = getCustomRepository(UsersRepository);
@@ -60,5 +68,27 @@ export class CreateFoodstoreService {
 
       
     }
+<<<<<<< HEAD
+=======
+    const address = addressRepository.create({
+      zip_code,
+      street,
+      number,
+      city,
+      state,
+    });
+    await addressRepository.save(address);
+
+    const foodstore = foodstoreRepository.create({
+      name,
+      user: user,
+      address: address,
+      actived: actived
+    });
+
+    await foodstoreRepository.save(foodstore);
+
+    return foodstore;
+>>>>>>> feature/product-category
   }
 }
