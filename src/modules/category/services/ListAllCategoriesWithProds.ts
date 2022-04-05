@@ -17,7 +17,7 @@ export class ListAllCategoriesWithProds {
 
     const categories = await categoryRepository.find({
       where: { foodstore: foodstore },
-      select: ['name'],
+      select: ['id', 'name'],
       relations: ['product'],
     });
 
