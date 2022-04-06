@@ -1,9 +1,11 @@
+import { Sale } from '@modules/sale/typeorm/entities/Sale';
 import {
   Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn
@@ -27,6 +29,9 @@ export class FoodStore {
 
   @ManyToOne((type) => User, (user) => user.foodstore, { onDelete: 'CASCADE' })
   user: User;
+
+  // @OneToMany(() => Sale, (sale) => sale)
+  // sales: Sale[];
 
   // @ManyToOne((type) => Category, (category) => category.foodstore, { onDelete: 'CASCADE' })
   // category: Category[];

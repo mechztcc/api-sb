@@ -12,7 +12,7 @@ export class FindFoodstoreService {
 
     const foodstore = await foodstoreRepository.findOne({
       where: { id: id },
-      relations: ['address'],
+      relations: ['address',],
     });
     return foodstore;
   }

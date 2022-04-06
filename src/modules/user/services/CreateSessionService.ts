@@ -20,7 +20,6 @@ interface IUser {
 
   password: string;
 
-
   avatar?: string;
 
   created_at?: Date;
