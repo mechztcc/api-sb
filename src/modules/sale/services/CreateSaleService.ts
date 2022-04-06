@@ -9,6 +9,7 @@ import { SalesRepository } from '../typeorm/repositories/SalesRepository';
 
 interface IRequest {
   foodstore_id: number | string;
+  status: string;
   notes: string;
   customer_id: string | number;
   sale_products: SaleProduct[];
@@ -17,6 +18,7 @@ interface IRequest {
 export class CreateSaleService {
   async execute({
     foodstore_id,
+    status,
     notes,
     customer_id,
     sale_products,
@@ -40,7 +42,8 @@ export class CreateSaleService {
       foodstore: foodstore,
       customer: customer,
       delivery: customer.address,
-      notes: notes
+      notes: notes,
+      status: status
     });
 
 		await salesRepository.save(sale);

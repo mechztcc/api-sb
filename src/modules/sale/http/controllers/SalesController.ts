@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 export class SalesController {
   async create(req: Request, res: Response): Promise<Response> {
     try {
-      const { foodstore_id, notes, customer_id, sale_products } = req.body;
+      const { foodstore_id, notes, customer_id, sale_products, status } = req.body;
 
       const createSale = new CreateSaleService();
 
@@ -14,6 +14,7 @@ export class SalesController {
         notes,
         customer_id,
         sale_products,
+        status
       });
 
       return res.json(sale);

@@ -19,6 +19,9 @@ export class Sale {
   @Column()
   notes: String;
 
+  @Column()
+  status: String;
+
   @OneToOne(() => Customer)
   @JoinColumn()
   customer: Customer;
