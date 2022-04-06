@@ -8,10 +8,10 @@ export class Customer {
     id: number;
 
     @Column()
-    phone: number;
+    name: String;
 
     @Column()
-    email: String;
+    phone: String;
 
     @Column()
     password: String;
