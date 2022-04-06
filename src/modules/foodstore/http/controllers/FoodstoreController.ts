@@ -8,7 +8,7 @@ import { CreateFoodstoreService } from '../../services/CreateFoodstoreService';
 export class FoodstoreController {
   async create(req: Request, res: Response): Promise<Response> {
     try {
-      const { name, actived } = req.body;
+      const { name, actived, description } = req.body;
       const { zip_code, street, number, city, state } = req.body.address;
       const { id } = req.user;
 
@@ -16,6 +16,7 @@ export class FoodstoreController {
 
       const foodstore = await createFoodstore.create({
         name,
+        description,
         user_id: id,
         zip_code,
         street,

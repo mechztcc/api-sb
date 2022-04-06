@@ -23,6 +23,10 @@ export class createFoodStore1645492321843 implements MigrationInterface {
             type: 'varchar',
           },
           {
+            name: 'description',
+            type: 'varchar',
+          },
+          {
             name: 'actived',
             type: 'boolean',
           },

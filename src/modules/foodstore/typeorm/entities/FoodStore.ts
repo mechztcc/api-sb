@@ -1,4 +1,3 @@
-import { Category } from '../../../category/typeorm/entities/Category';
 import {
   Column,
   CreateDateColumn,
@@ -7,7 +6,7 @@ import {
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
+  UpdateDateColumn
 } from 'typeorm';
 import { Address } from '../../../../modules/address/typeorm/entities/Address';
 import { User } from '../../../../modules/user/typeorm/entities/User';
@@ -19,6 +18,9 @@ export class FoodStore {
 
   @Column()
   name: string;
+
+  @Column()
+  description: string;
 
   @Column()
   actived: boolean;

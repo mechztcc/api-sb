@@ -7,6 +7,7 @@ import { FoodstoreRepository } from '../typeorm/repositories/FoodstoreRepository
 
 interface IRequest {
   name: string;
+  description: string;
   user_id: string;
   zip_code: string;
   street: string;
@@ -19,6 +20,7 @@ interface IRequest {
 export class CreateFoodstoreService {
   async create({
     name,
+    description,
     user_id,
     zip_code,
     street,
@@ -47,6 +49,7 @@ export class CreateFoodstoreService {
 
       const foodstore = foodstoreRepository.create({
         name,
+        description: description,
         user: user,
         address: address,
         actived: actived
