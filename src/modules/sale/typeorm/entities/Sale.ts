@@ -1,22 +1,25 @@
-import { Address } from '../../../address/typeorm/entities/Address';
-import { FoodStore } from '../../../foodstore/typeorm/entities/FoodStore';
-import { Product } from '../../../product/typeorm/entities/Product';
+import { Customer } from '../../../customer/typeorm/entities/Customer';
 import {
-  Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
+  UpdateDateColumn
 } from 'typeorm';
+import { Address } from '../../../address/typeorm/entities/Address';
+import { FoodStore } from '../../../foodstore/typeorm/entities/FoodStore';
 import { SaleProduct } from './SaleProduct';
 
 @Entity('sale')
 export class Sale {
   @PrimaryGeneratedColumn('increment')
   id: number;
+
+  @OneToOne(() => Customer)
+  @JoinColumn()
+  customer: Customer;
 
   @OneToOne(() => FoodStore)
   @JoinColumn()

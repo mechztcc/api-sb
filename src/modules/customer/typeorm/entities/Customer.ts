@@ -1,5 +1,5 @@
-import { Address } from "@modules/address/typeorm/entities/Address";
-import { Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Address } from "../../../address/typeorm/entities/Address";
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('customers')
 export class Customer {
@@ -17,6 +17,7 @@ export class Customer {
     password: String;
 
     @OneToOne(() => Address)
+    @JoinColumn()
     address: Address
 
     @CreateDateColumn()
