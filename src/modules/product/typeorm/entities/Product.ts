@@ -1,12 +1,13 @@
-import { Category } from '../../../category/typeorm/entities/Category';
+import { Sale } from '../../../sale/typeorm/entities/Sale';
 import {
-    Column,
+  Column,
   CreateDateColumn,
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
+  UpdateDateColumn
 } from 'typeorm';
+import { Category } from '../../../category/typeorm/entities/Category';
 
 @Entity('products')
 export class Product {
@@ -21,6 +22,9 @@ export class Product {
 
   @ManyToOne((type) => Category, (category) => category.product)
   category: Category;
+
+  // @ManyToOne(() => Sale)
+  // sale: Sale;
 
   @Column()
   size: string;
