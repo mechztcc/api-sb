@@ -28,9 +28,9 @@ export class CreateBagItemService {
       throw new AppError('Customer not found ');
     }
 
-    const customer_bag = await bagRepo.findOne({
+    let customer_bag = await bagRepo.findOne({
 			relations: ['items'],
-      where: { cutomer: customer_id },
+      where: { customer: customer_id },
     });
 
     const bagItem = bagItemRepo.create({
@@ -40,6 +40,12 @@ export class CreateBagItemService {
 			bag: customer_bag
     });
 		await bagItemRepo.save(bagItem);
+
+    customer_bag = await bagRepo.findOne({
+			relations: ['items'],
+      where: { customer: customer_id },
+    });
+
 
 		return customer_bag;
 

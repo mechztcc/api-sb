@@ -18,7 +18,7 @@ export class Bag {
 
   @OneToOne(() => Customer)
   @JoinColumn()
-  cutomer: Customer;
+  customer: Customer;
 
   @OneToMany(() => BagItem, (item) => item.bag)
   items: BagItem[];
