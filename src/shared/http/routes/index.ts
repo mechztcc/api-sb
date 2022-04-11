@@ -1,3 +1,4 @@
+import bagRouter from '@modules/bag/routes/bag.routes';
 import categoryRouter from '@modules/category/routes/categorys.routes';
 import customerRouter from '@modules/customer/routes/customers.routes';
 import productRouter from '@modules/product/routes/products.routes';
@@ -16,5 +17,6 @@ routes.use('/products', productRouter);
 routes.use('/categories', categoryRouter);
 routes.use('/customers', customerRouter);
 routes.use('/sales', salesRouter);
+routes.use('/bag', bagRouter);
 
 export default routes;
