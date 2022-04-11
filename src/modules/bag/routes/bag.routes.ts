@@ -6,5 +6,6 @@ const bagController = new BagController();
 const bagRouter = Router();
 
 bagRouter.post('/create', isAuthenticated, bagController.create);
+bagRouter.post('/add-item', isAuthenticated, bagController.addItemToBag);
 
 export default bagRouter;
