@@ -8,5 +8,6 @@ const bagRouter = Router();
 bagRouter.post('/create', isAuthenticated, bagController.create);
 bagRouter.post('/add-item', isAuthenticated, bagController.addItemToBag);
 bagRouter.get('/find-bag', isAuthenticated, bagController.find);
+bagRouter.delete('/remove-item', isAuthenticated, bagController.removeItem);
 
 export default bagRouter;
