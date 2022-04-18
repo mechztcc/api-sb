@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { ClearBagService } from '../services/ClearBagService';
 import { CreateBagItemService } from '../services/CreateBagItemService';
 import { CreateBagService } from '../services/CreateBagService';
 import { FindBagByCustomerService } from '../services/FindBagByCustomerService';
@@ -68,8 +69,20 @@ export class BagController {
         item_id: item_id,
       });
 
+      return res.json({ message: 'Sucesso! ' });
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json('Error when execute task ');
+    }
+  }
+
+  async clearAllItems(req: Request, res: Response): Promise<Response> {
+    try {
+      const { id } = req.user;
+      const clearBag = new ClearBagService();
+
+      const bag = await clearBag.execute({ customer_id: id });
       return res.json({ message: 'Sucesso! '});
-      
     } catch (error) {
       console.log(error);
       return res.status(400).json('Error when execute task ');
