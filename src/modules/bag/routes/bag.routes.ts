@@ -10,5 +10,6 @@ bagRouter.post('/add-item', isAuthenticated, bagController.addItemToBag);
 bagRouter.get('/find-bag', isAuthenticated, bagController.find);
 bagRouter.delete('/remove-item', isAuthenticated, bagController.removeItem);
 bagRouter.delete('/clear', isAuthenticated, bagController.clearAllItems);
+bagRouter.get('/total', isAuthenticated, bagController.calculateTotal);
 
 export default bagRouter;

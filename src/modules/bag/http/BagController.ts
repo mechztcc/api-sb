@@ -4,6 +4,7 @@ import { CreateBagItemService } from '../services/CreateBagItemService';
 import { CreateBagService } from '../services/CreateBagService';
 import { FindBagByCustomerService } from '../services/FindBagByCustomerService';
 import { RemoveItemService } from '../services/RemoveItemService';
+import { CalculateTotalByBagService } from '../../bag/services/CalculateTotalByBagService'
 
 export class BagController {
   async create(req: Request, res: Response): Promise<Response> {
@@ -82,7 +83,21 @@ export class BagController {
       const clearBag = new ClearBagService();
 
       const bag = await clearBag.execute({ customer_id: id });
-      return res.json({ message: 'Sucesso! '});
+      return res.json({ message: 'Sucesso! ' });
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json('Error when execute task ');
+    }
+  }
+
+  async calculateTotal(req: Request, res: Response): Promise<Response> {
+    try {
+      const { id } = req.user;
+
+      const calculateTotalBag = new CalculateTotalByBagService();
+
+      const bag = await calculateTotalBag.execute({ customer_id: id });
+      return res.json(bag);
     } catch (error) {
       console.log(error);
       return res.status(400).json('Error when execute task ');
